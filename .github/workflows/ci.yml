@@ -20,7 +20,9 @@ jobs:
       - name: Collector tests
         run: python3 -m unittest discover -s collector/tests -v
       - name: Workflow template parses
-        run: python3 -c "import yaml; yaml.safe_load(open('relaunch/agent-relaunch.yml'))"
+        run: |
+          python3 -m pip install --quiet pyyaml==6.0.3
+          python3 -c "import yaml; yaml.safe_load(open('relaunch/agent-relaunch.yml'))"
 
   app:
     runs-on: ubuntu-24.04
